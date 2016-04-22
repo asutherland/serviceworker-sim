@@ -9,7 +9,7 @@ function determineRequestsReferrer(request) {
   if (request.is3xxRedirect) {
     referrerSource = request.referrer;
     if (referrerSource === null) {
-      return 'no referrer';
+      return 'no-referrer';
     }
     policy = request.redirectResponse.referrerPolicy;
   } else { // 3.
@@ -43,7 +43,7 @@ function determineRequestsReferrer(request) {
       if (document) {
         // 3.3.3.1.
         if (!isSchemeHostPort(document.origin)) {
-          return 'no referrer';
+          return 'no-referrer';
         }
         // 3.3.3.2.
         // => (srcdoc documents by their nature are raw embedded content and
@@ -64,27 +64,27 @@ function determineRequestsReferrer(request) {
   let referrerOrigin = stripForUseAsReferrer(referrerSource, {originOnly: true});
 
   switch (policy) {
-    case 'no referrer': {
-      return 'no referrer';
+    case 'no-referrer': {
+      return 'no-referrer';
     }
-    case 'origin only': {
+    case 'origin-only': {
       return referrerOrigin;
     }
-    case 'unsafe url': {
+    case 'unsafe-url': {
       return referrerURL;
     }
-    case 'origin when cross-origin': {
+    case 'origin-when-cross-origin': {
       if (request.isCrossOrigin) {
         return referrerOrigin;
       }
       return referrerURL;
     }
-    case 'no referrer when downgrade':
+    case 'no-referrer-when-downgrade':
     case '':
       if (request.is3xxRedirect) {
         if (request.originalRequest.isTLSProtected &&
             request.url.origin.isInsecure) {
-          return 'no referrer';
+          return 'no-referrer';
         }
         return referrerURL;
       } else {
@@ -93,7 +93,7 @@ function determineRequestsReferrer(request) {
         let environment = request.client;
         if (environment.isTLSProtected &&
             request.url.origin.isInsecure) {
-          return 'no referrer';
+          return 'no-referrer';
         }
         return referrerURL;
       }

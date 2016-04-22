@@ -1,3 +1,4 @@
+define(function(require) {
 'use strict';
 
 /**
@@ -8,6 +9,7 @@
  **/
 
 function Cache(curried_ctx, name) {
+  this._ctx = curried_ctx;
   this.name = name;
 }
 Cache.prototype = {
@@ -28,6 +30,9 @@ Cache.prototype = {
   },
 
   put(request, response) {
+    request = this._ctx.coerce.Request(request);
+    response = this._ctx.coerce.Response(response);
+
     /// 1. Let r be null.
     // => temporary to hold a normalized version of "request" so that it's a
     // proper Request and has no fragment.
@@ -65,10 +70,10 @@ Cache.prototype = {
     /// 7. Let newResponse be a new Response object associated with response’s
     /// associated response and a new Headers object whose guard is response’s
     /// Headers' guard.
-    // => 
+    // =>
 
 
-    this._emit({
+    this._ctx.emit({
       queue: 'cache',
       cache: this.name,
 
@@ -85,3 +90,4 @@ Cache.prototype = {
 };
 
 return Cache;
+});

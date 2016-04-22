@@ -1,3 +1,12 @@
+Right now this is just a scratchpad where I write pseudo-code with what amount
+to annotated specs (in the comments) in an attempt to understand the specs and
+not fall asleep in the process.
+
+Originally I was trying to implement a toy simulation as described below, but I
+don't have the time to follow through on the dream.
+
+## Original Goals ##
+
 Toy simulations of Service Worker-related APIs with the intent of aiding in
 understanding and discussion of concurrency and ordering-related scenarios.  In
 other words, nuances not related to concurrency are discarded.

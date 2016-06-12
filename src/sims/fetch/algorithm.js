@@ -31,7 +31,10 @@ function mainFetch(request, { cors, recursive }) {
   // 9. ~HSTS upgrade junk
   // TODO
 
+  // 10. GO ASYNC
   // ...
+  // 11.
+  //if ((request.url.origin === request.client.origin && !cors) ||
 }
 
 return {
